@@ -7,14 +7,15 @@ use Laravel\Socialite\Contracts\Factory;
 
 class SocialiteServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/hobbii-socialite.php', 'hobbii-socialite',
+            __DIR__ . '/../config/hobbii-socialite.php',
+            'hobbii-socialite',
         );
     }
 
-    public function boot()
+    public function boot(): void
     {
         $socialite = $this->app->make(Factory::class);
         $socialite->extend(
@@ -22,7 +23,7 @@ class SocialiteServiceProvider extends ServiceProvider
             fn ($app) => $socialite->buildProvider(HobbiiProvider::class, $app['config']['hobbii-socialite.settings'])
         );
         $this->publishes([
-            __DIR__.'/../config/hobbii-socialite.php' => config_path('hobbii-socialite.php'),
+            __DIR__ . '/../config/hobbii-socialite.php' => config_path('hobbii-socialite.php'),
         ]);
     }
 }

@@ -33,9 +33,12 @@ class HobbiiProvider extends AbstractProvider implements ProviderInterface
     }
 
     /**
-     * @inheritDoc
-     * @throws \JsonException
+     * Get the raw user for the given access token.
+     *
+     * @param string $token
+     * @return string[]
      * @throws GuzzleException
+     * @throws \JsonException
      */
     protected function getUserByToken($token): array
     {
@@ -52,7 +55,10 @@ class HobbiiProvider extends AbstractProvider implements ProviderInterface
     }
 
     /**
-     * @inheritDoc
+     * Map the raw user array to a Socialite User instance.
+     *
+     * @param string[] $user
+     * @return User
      * @throws \Throwable
      */
     protected function mapUserToObject(array $user): User
