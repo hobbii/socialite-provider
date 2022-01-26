@@ -2,11 +2,13 @@
 
 namespace Hobbii\SocialiteProvider;
 
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
+use JsonException;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
 use Laravel\Socialite\Two\User;
@@ -33,9 +35,12 @@ class HobbiiProvider extends AbstractProvider implements ProviderInterface
     }
 
     /**
-     * @inheritDoc
-     * @throws \JsonException
+     * Get the raw user for the given access token.
+     *
+     * @param string $token
+     * @return string[]
      * @throws GuzzleException
+     * @throws JsonException
      */
     protected function getUserByToken($token): array
     {
@@ -52,12 +57,15 @@ class HobbiiProvider extends AbstractProvider implements ProviderInterface
     }
 
     /**
-     * @inheritDoc
+     * Map the raw user array to a Socialite User instance.
+     *
+     * @param string[] $user
+     * @return User
      * @throws \Throwable
      */
     protected function mapUserToObject(array $user): User
     {
-        throw_if(empty($user), \Exception::class, 'No user returned!');
+        throw_if(empty($user), Exception::class, 'No user returned!');
 
         return (new User())->setRaw($user)->map([
             'id' => Arr::get($user, 'cognito_id', Arr::get($user, 'google_id')),
