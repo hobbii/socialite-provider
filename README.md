@@ -1,6 +1,6 @@
 # Hobbii Socialite Provider
 [![codecov](https://codecov.io/gh/hobbii/socialite-provider/branch/main/graph/badge.svg?token=GZysNzh3Qn)](https://codecov.io/gh/hobbii/socialite-provider)
-[CI Workflow](https://github.com/hobbii/socialite-provider/actions/workflows/ci.yaml/badge.svg?branch=main)
+![CI Workflow](https://github.com/hobbii/socialite-provider/actions/workflows/ci.yaml/badge.svg?branch=main)
 
 A login provider for Hobbii with [Laravel Socialite](https://github.com/laravel/socialite)
 
