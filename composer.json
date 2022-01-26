@@ -1,0 +1,22 @@
+{
+  "name": "hobbii/socialite-provider",
+  "description": "Hobbii OAuth provider for Laravel Socialite",
+  "require": {
+    "php": "^8.1",
+    "ext-json": "*",
+    "laravel/socialite": "^5.4",
+    "illuminate/support": "^8.81"
+  },
+  "autoload": {
+    "psr-4": {
+      "Hobbii\\SocialiteProvider\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Hobbii\\SocialiteProvider\\SocialiteServiceProvider"
+      ]
+    }
+  }
+}
