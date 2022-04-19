@@ -1,8 +1,10 @@
 # Hobbii Socialite Provider
 [![codecov](https://codecov.io/gh/hobbii/socialite-provider/branch/main/graph/badge.svg?token=GZysNzh3Qn)](https://codecov.io/gh/hobbii/socialite-provider)
+[![Total Downloads](https://img.shields.io/packagist/dt/hobbii/socialite-provider)](https://packagist.org/packages/hobbii/socialite-provider)
+[![Latest Version](https://img.shields.io/packagist/v/hobbii/socialite-provider)](https://packagist.org/packages/hobbii/socialite-provider)
 ![CI Workflow](https://github.com/hobbii/socialite-provider/actions/workflows/ci.yaml/badge.svg?branch=main)
 
-A login provider for Hobbii with [Laravel Socialite](https://github.com/laravel/socialite)
+A public composer pacakge, adding login provider for Hobbii with [Laravel Socialite](https://github.com/laravel/socialite)
 
 ```shell
 composer require hobbii/socialite-provider
