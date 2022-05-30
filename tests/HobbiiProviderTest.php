@@ -5,11 +5,11 @@ namespace Tests;
 use Faker\Factory;
 use Faker\Generator;
 use Hobbii\SocialiteProvider\HobbiiProvider;
+use Hobbii\SocialiteProvider\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use Laravel\Socialite\Two\User;
 use Orchestra\Testbench\TestCase;
 
 class HobbiiProviderTest extends TestCase
@@ -85,6 +85,7 @@ class HobbiiProviderTest extends TestCase
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->email(),
+            'provider' => $this->faker->randomElement(['cognito', 'google']),
             'locale' => Str::replace('_', '-', $this->faker->locale()),
         ];
         $accessTokenResponse = $this->makeResponse(['access_token' => $this->faker->password(255)]);
@@ -98,5 +99,7 @@ class HobbiiProviderTest extends TestCase
         $this->assertEquals($hobbiiUser['first_name'] . ' ' . $hobbiiUser['last_name'], $user->getName());
         $this->assertEquals($hobbiiUser['email'], $user->getEmail());
         $this->assertEquals($hobbiiUser, $user->user);
+        $this->assertEquals($hobbiiUser['provider'] === 'cognito', $user->isMyHobbii());
+        $this->assertEquals($hobbiiUser['provider'] === 'google', $user->isEmployee());
     }
 }
