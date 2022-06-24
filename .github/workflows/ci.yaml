@@ -13,24 +13,7 @@ on:
       - synchronize
 
 jobs:
-  php-cs-fixer:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run PHP CS Fixer
-        uses: docker://oskarstark/php-cs-fixer-ga
-        with:
-          args: --config=.php-cs-fixer.php --allow-risky=yes
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: PHP CS Fixes
   tests:
-    needs: php-cs-fixer
     runs-on: ubuntu-latest
     steps:
       - name: Setup PHP
@@ -65,14 +48,18 @@ jobs:
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: vendor/bin/phpunit -d memory_limit=512M --coverage-clover clover.xml
+      - name: Run PHP CS Fixer
+        run: vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
 
       - name: Execute Static Analysis via PHPStan
         run: vendor/bin/phpstan analyse
 
-      - name: Upload Coverage Report to Codecov.io
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        run: vendor/bin/phpunit -d memory_limit=512M --coverage-clover build/logs/clover.xml
+
+      - name: Upload coverage results to Coveralls
         env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        shell: bash
-        run: bash <(curl -s https://codecov.io/bash) -t ${CODECOV_TOKEN} -f ${GITHUB_WORKSPACE}/clover.xml -C ${GITHUB_SHA}
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          php-coveralls --coverage_clover=build/logs/clover.xml -v
