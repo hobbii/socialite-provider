@@ -1,5 +1,5 @@
 # Hobbii Socialite Provider
-[![codecov](https://codecov.io/gh/hobbii/socialite-provider/branch/main/graph/badge.svg?token=GZysNzh3Qn)](https://codecov.io/gh/hobbii/socialite-provider)
+[![Coverage Status](https://coveralls.io/repos/github/hobbii/socialite-provider/badge.svg?branch=main)](https://coveralls.io/github/hobbii/socialite-provider?branch=main)
 [![Total Downloads](https://img.shields.io/packagist/dt/hobbii/socialite-provider)](https://packagist.org/packages/hobbii/socialite-provider)
 [![Latest Version](https://img.shields.io/packagist/v/hobbii/socialite-provider)](https://packagist.org/packages/hobbii/socialite-provider)
 ![CI Workflow](https://github.com/hobbii/socialite-provider/actions/workflows/ci.yaml/badge.svg?branch=main)
